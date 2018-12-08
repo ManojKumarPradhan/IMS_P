@@ -24,7 +24,7 @@
 				<h2>REGISTER FORM EMPLOYEE</h2>
 			</div>
 			<div class="panel-body">
-				<form:form action="/save" method="POST" modelAttribute="employee"
+				<form:form action="save" method="post" modelAttribute="employee"
 					enctype="multipart/form-data" class="form-horizontal">
 					<div class="form-group">
 						<label for="name" class="control-label col-sm-2">Employee
@@ -63,24 +63,24 @@
 						<label for="address1" class="control-label col-sm-2">Employee
 							Address</label>
 						<div class="col-sm-4">
-							<form:input path="address1" class="form-control"
-								placeholder="Enter Mobile Number" />
+							<form:textarea path="address1" class="form-control"
+								placeholder="Enter Address" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="address2" class="control-label col-sm-2">Employee
 							Address</label>
 						<div class="col-sm-4">
-							<form:input path="address2" class="form-control"
-								placeholder="Enter Mobile Number" />
+							<form:textarea path="address2" class="form-control" />
+							[Optional]
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="address3" class="control-label col-sm-2">Employee
 							Address</label>
 						<div class="col-sm-4">
-							<form:input path="address3" class="form-control"
-								placeholder="Enter Mobile Number" />
+							<form:textarea path="address3" class="form-control" />
+							[Optional]
 						</div>
 					</div>
 					<div class="form-group">
@@ -102,19 +102,19 @@
 							ID Number</label>
 						<div class="col-sm-4">
 							<form:input path="idNum" class="form-control"
-								placeholder="Enter Email" />
+								placeholder="Enter Id Number" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="docName" class="control-label col-sm-2">Employee
+						<label for="file" class="control-label col-sm-2">Employee
 							Document</label>
 						<div class="col-sm-4">
-							<input type="file" class="form-control" required="required" />
+							<input type="file" name="file" class="form-control" required="required" />
 						</div>
 					</div>
 					<div class="form-group" align="center">
-						<input type="submit" value="Uom Register"
-							class="btn btn-success col-sm-4" width="50%" />
+						<input type="submit" value="Register"
+							class="btn btn-success col-sm-2" width="30%" />
 					</div>
 				</form:form>
 			</div>

@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +15,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -24,8 +24,8 @@ import com.ims.model.Employee;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("com.app")
-@PropertySource("classpath:appliation.properties")
+@ComponentScan("com.ims")
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class AppConfig {
 	public DataSource getDataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(env.getProperty("dc"));
-		basicDataSource.setUrl(env.getProperty("dc"));
+		basicDataSource.setUrl(env.getProperty("url"));
 		basicDataSource.setUsername(env.getProperty("un"));
 		basicDataSource.setPassword(env.getProperty("pwd"));
 
@@ -49,12 +49,12 @@ public class AppConfig {
 
 	// SessionFactory
 	@Bean
-	public SessionFactory getSessionFactory() {
+	public LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
 		localSessionFactoryBean.setDataSource(getDataSource());
 		localSessionFactoryBean.setAnnotatedClasses(Employee.class);
 		localSessionFactoryBean.setHibernateProperties(props());
-		return localSessionFactoryBean.getObject();
+		return localSessionFactoryBean;
 	}
 
 	private Properties props() {
@@ -69,17 +69,24 @@ public class AppConfig {
 	// HibernateTemplate
 	@Bean
 	public HibernateTemplate getHibernateTemplate() {
-		return new HibernateTemplate(getSessionFactory());
+		return new HibernateTemplate(getSessionFactory().getObject());
 	}
 
 	// Transaction Management
 	@Bean
 	public HibernateTransactionManager getTxManager() {
-		return new HibernateTransactionManager(getSessionFactory());
+		return new HibernateTransactionManager(getSessionFactory().getObject());
 	}
 
 	// InternalResourceViewResolver
+	@Bean
 	public InternalResourceViewResolver getViewResolver() {
 		return new InternalResourceViewResolver(env.getProperty("mvc.prefix"), env.getProperty("mvc.suffix"));
+	}
+
+	// MultiPartResolver from file loading
+	@Bean
+	public CommonsMultipartResolver getMultipartResolver() {
+		return new CommonsMultipartResolver();
 	}
 }
