@@ -86,7 +86,7 @@ public class AppConfig {
 
 	// MultiPartResolver from file loading
 	@Bean
-	public CommonsMultipartResolver getMultipartResolver() {
+	public CommonsMultipartResolver multipartResolver() {
 		return new CommonsMultipartResolver();
 	}
 }

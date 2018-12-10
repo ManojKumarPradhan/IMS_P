@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Register</title>
+<title>Employee Edit</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -21,25 +21,30 @@
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2>REGISTER FORM EMPLOYEE</h2>
+				<h2>EMPLOYEE EDIT PAGE</h2>
 			</div>
 			<div class="panel-body">
-				<form:form action="save" method="post" modelAttribute="employee" enctype="multipart/form-data"
-					 class="form-horizontal">
+				<form:form action="update" method="post" modelAttribute="employee" enctype="multipart/form-data"
+					class="form-horizontal">
+					<div class="form-group">
+						<label for="name" class="control-label col-sm-2">Employee
+							Id</label>
+						<div class="col-sm-4">
+							<form:input path="id" class="form-control" readonly="true" />
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="name" class="control-label col-sm-2">Employee
 							Name</label>
 						<div class="col-sm-4">
-							<form:input path="name" class="form-control"
-								placeholder="Enter Name" />
+							<form:input path="name" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="emailId" class="control-label col-sm-2">Employee
 							Email</label>
 						<div class="col-sm-4">
-							<form:input path="emailId" class="form-control"
-								placeholder="Enter Email" />
+							<form:input path="emailId" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -63,8 +68,7 @@
 						<label for="address1" class="control-label col-sm-2">Employee
 							Address</label>
 						<div class="col-sm-4">
-							<form:textarea path="address1" class="form-control"
-								placeholder="Enter Address" />
+							<form:textarea path="address1" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -119,13 +123,6 @@
 				</form:form>
 			</div>
 			<!-- panel body close -->
-
-			<div class="panel-footer panel-info">
-				<c:if test="${message ne null }">
-					<div class="card-footer bg-success text-white">${message}</div>
-				</c:if>
-			</div>
-			<!-- panel footer close -->
 		</div>
 		<!-- panel close -->
 	</div>

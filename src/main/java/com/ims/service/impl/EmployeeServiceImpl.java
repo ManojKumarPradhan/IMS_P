@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ims.dao.IEmployeeDao;
 import com.ims.model.Employee;
@@ -15,27 +16,27 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	@Autowired
 	private IEmployeeDao dao;
 
-	@Override
+	@Transactional
 	public Integer saveEmployee(Employee employee) {
 		return dao.saveEmployee(employee);
 	}
 
-	@Override
+	@Transactional
 	public void deleteEmployee(Integer id) {
 		dao.deleteEmployee(id);
 	}
 
-	@Override
+	@Transactional
 	public void updateEmployee(Employee employee) {
 		dao.updateEmployee(employee);
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public Employee getOneEmployee(Integer id) {
 		return dao.getOneEmployee(id);
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Employee> getAllEmployees() {
 		return dao.getAllEmployees();
 	}
